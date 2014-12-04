@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-US">
+<html lang="en-US" ng-app="MyApp">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,10 +8,21 @@
 </head>
 <body>
 
-  <div class="container">
-    <h1>My Site Title</h1>
+  <div class="container" ng-controller="SimpleController as smpctrl">
+    <h1>My name is {{smpctrl.name}}</h1>
+    Name: <input type="text" ng-model="smpctrl.name" /> 
+
+    <h2>My Friends</h2>
+    New Friend: <input type="text" ng-model="smpctrl.newFriend" /> <button ng-click="smpctrl.friends.push(smpctrl.newFriend)">Add</button><br>
+
+    Search: <input type="text" ng-model="smpctrl.friendSearch" /> 
+    <a href="#" ng-click="friendReverse=!friendReverse">Sort<a/>
+    <ul>
+        <li ng-repeat="friend in smpctrl.friends | orderBy:'':friendReverse | filter:friendSearch">{{friend | uppercase}}</li>
+    </ul>
   </div>
 
+  <script src="bower_components/angular/angular.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
